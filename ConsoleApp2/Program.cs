@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace ConsoleApp2
 {
@@ -14,12 +15,15 @@ namespace ConsoleApp2
         {
             EnterNumber();
             ColorRedNumber();
-            key();
+            key(Digits, N_digits);
+            
+    
+               
+               
+            
 
         }
-        public static void Menu() 
-        {
-        }
+        
         public static void EnterNumber()
         {
             Console.WriteLine("Enter N");
@@ -47,7 +51,7 @@ namespace ConsoleApp2
                 Digits[i] = Convert.ToInt16(Console.ReadLine());
             }
         }
-        public static void SortUp()
+        public static void SortUp(int[] Digits, int N_digits)
         {
             for (int i = 0; i < Digits.Length; i++)
                 for (int j = i + 1; j < Digits.Length; j++)
@@ -59,8 +63,9 @@ namespace ConsoleApp2
                         Digits[j] = temp;
                     }
                 }
+            Console.WriteLine("SortUp Successfully!!!");
         }
-        public static void SortDown()
+        public static void SortDown(int[] Digits, int N_digits)
         {
             for (int i = 0; i < Digits.Length; i++)
                 for (int j = i + 1; j < Digits.Length; j++)
@@ -72,43 +77,44 @@ namespace ConsoleApp2
                         Digits[j] = temp;
                     }
                 }
+            Console.WriteLine("SortDown Successfully!!!");
         }
-        public static void ShowResult()
+        public static void ShowResult(int[] Digits, int N_digits)
         {
             if (N_digits == 5)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"| {Digits[1]}    |{Digits[2]}   | {Digits[3]}   |  {Digits[4]}   | {Digits[5]}    | ");
+                Console.WriteLine($"| {Digits[0]}    |{Digits[1]}   | {Digits[2]}   |  {Digits[3]}   | {Digits[4]}    | ");
                 Console.WriteLine("+-----+-----+-----+-----+-----+");
             }
             if (N_digits == 6)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"| {Digits[1]}   |{Digits[2]}    | {Digits[3]}   | {Digits[4]}    | {Digits[5]}   |{Digits[6]}    |");
+                Console.WriteLine($"| {Digits[0]}   |{Digits[1]}    | {Digits[2]}   | {Digits[3]}    | {Digits[4]}   |{Digits[5]}    |");
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+");
             }
             if (N_digits == 7)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"|{Digits[1]}  | {Digits[2]}   | {Digits[3]}    |  {Digits[4]}    |  {Digits[5]}    | {Digits[6]}  | {Digits[7]}    |");
+                Console.WriteLine($"|{Digits[0]}  | {Digits[1]}   | {Digits[2]}    |  {Digits[3]}    |  {Digits[4]}    | {Digits[5]}  | {Digits[6]}    |");
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+");
             }
             if (N_digits == 8)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"|{Digits[1]}    |{Digits[2]}   | {Digits[3]}    | {Digits[4]}   | {Digits[5]}   | {Digits[6]}   |{Digits[7]}    | {Digits[8]}   |");
+                Console.WriteLine($"|{Digits[0]}    |{Digits[1]}   | {Digits[2]}    | {Digits[3]}   | {Digits[4]}   | {Digits[5]}   |{Digits[6]}    | {Digits[7]}   |");
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+");
             }
             if (N_digits == 9)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"|{Digits[1]}   | {Digits[2]}    | {Digits[3]}  | {Digits[4]}   | {Digits[5]}   | {Digits[6]}     | {Digits[7]}   |{Digits[8]}   | {Digits[9]}    |");
+                Console.WriteLine($"|{Digits[0]}   | {Digits[1]}    | {Digits[2]}  | {Digits[3]}   | {Digits[4]}   | {Digits[5]}     | {Digits[6]}   |{Digits[7]}   | {Digits[8]}    |");
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
             }
             if (N_digits == 10)
             {
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
-                Console.WriteLine($"|{Digits[1]}    |{Digits[2]}  | {Digits[3]}   | {Digits[4]}   | {Digits[5]}   |{Digits[6]}    |{Digits[7]}   | {Digits[8]}   | {Digits[9]}     | {Digits[10]}   |");
+                Console.WriteLine($"|{Digits[0]}    |{Digits[1]}  | {Digits[2]}   | {Digits[3]}   | {Digits[4]}   |{Digits[5]}    |{Digits[6]}   | {Digits[7]}   | {Digits[8]}     | {Digits[9]}   |");
                 Console.WriteLine("+-----+-----+-----+-----+-----+-----+-----+-----+-----+-----+");
             }
 
@@ -116,8 +122,9 @@ namespace ConsoleApp2
 
 
         }
-        public static void DemoSortUp()
+        public static void DemoSortUp(int[]Digits, int N_digits)
         {
+            ShowResult(Digits, N_digits);
             for (int i = 0; i < Digits.Length; i++)
                 for (int j = i + 1; j < Digits.Length; j++)
                 {
@@ -126,22 +133,24 @@ namespace ConsoleApp2
                         int temp = Digits[i];
                         Digits[i] = Digits[j];
                         Digits[j] = temp;
+                        ShowResult(Digits, N_digits);
+                        Thread.Sleep(1000);
                     }
                 }
-            ShowResult();
+
         }
         public static void Exit() 
         {
           Environment.Exit(0);  
         }
-        public static void key()
+        public static void key(int[] Digits,int N_digits)
         {  
             
             int x = 0;
             ConsoleKeyInfo key = new ConsoleKeyInfo();
-            key = Console.ReadKey(true);
-            while (!Console.KeyAvailable && key.Key != ConsoleKey.Escape)
+            while (true) 
             {
+                key = Console.ReadKey(true);
                 switch (key.Key)
                 {
                     case ConsoleKey.UpArrow:
@@ -154,15 +163,20 @@ namespace ConsoleApp2
                         if (x == 0)
                             EnterNumber();
                         if (x == 1)
-                            SortUp();
+                            SortUp(Digits, N_digits);
                         if (x == 2)
-                            SortDown();
+                            SortDown(Digits,N_digits);
                         if (x == 3)
-                            ShowResult();
+                            ShowResult(Digits, N_digits);
                         if (x == 4)
-                            DemoSortUp();
+                            DemoSortUp(Digits, N_digits);
                         if (x == 5)
+                        {
+                            Console.WriteLine("Goodbye!");
+                            Thread.Sleep(1000);
                             Exit();
+
+                        }
                         break;
                 }
 
@@ -171,10 +185,7 @@ namespace ConsoleApp2
                 if (x > 5)
                     x = 0;
                 DrawColor(x);
-            }
-            
-           
-
+            }              
         }
         public static void DrawColor(int x)
         {
@@ -222,9 +233,9 @@ namespace ConsoleApp2
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("1. Enter Number again");
-            Console.WriteLine("3. SortDown");
-            Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("2. SortUp");
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("3. SortDown");
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine("4. Show Result");
             Console.WriteLine("5. DemoSortup");
@@ -268,6 +279,7 @@ namespace ConsoleApp2
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("6. Exit");
         }
+       
 
     }
 }
